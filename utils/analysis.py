@@ -45,9 +45,16 @@ def collect_features(
     model.eval()
     feats_per_stage = None
     masks_per_stage = None
+
+    # Keep a balanced sample across contexts so analysis does not depend on
+    # dataset ordering (the test set is grouped by context in this repo).
+    per_ctx_target = [max_samples // NUM_CONTEXTS] * NUM_CONTEXTS
+    for i in range(max_samples % NUM_CONTEXTS):
+        per_ctx_target[i] += 1
+    per_ctx_collected = [0] * NUM_CONTEXTS
+
     all_labels = []
     all_contexts = []
-    collected = 0
 
     for x, y, ctx in loader:
         x = x.to(device, non_blocking=True)
@@ -67,22 +74,39 @@ def collect_features(
             feats_per_stage = [[] for _ in pooled]
             masks_per_stage = [[] for _ in masks]
 
-        for i, p in enumerate(pooled):
-            feats_per_stage[i].append(p)
-        for i, m in enumerate(masks):
-            masks_per_stage[i].append(m)
+        y_np = y.cpu().numpy()
+        ctx_np = ctx.cpu().numpy()
 
-        all_labels.append(y.cpu().numpy())
-        all_contexts.append(ctx.cpu().numpy())
-        collected += x.size(0)
-        if collected >= max_samples:
+        for c in range(NUM_CONTEXTS):
+            remaining = per_ctx_target[c] - per_ctx_collected[c]
+            if remaining <= 0:
+                continue
+
+            idx = np.where(ctx_np == c)[0]
+            if idx.size == 0:
+                continue
+
+            take_idx = idx[:remaining]
+            for i, p in enumerate(pooled):
+                feats_per_stage[i].append(p[take_idx])
+            for i, m in enumerate(masks):
+                masks_per_stage[i].append(m[take_idx])
+
+            all_labels.append(y_np[take_idx])
+            all_contexts.append(ctx_np[take_idx])
+            per_ctx_collected[c] += len(take_idx)
+
+        if all(count >= target for count, target in zip(per_ctx_collected, per_ctx_target)):
             break
 
+    if feats_per_stage is None or not all_labels:
+        raise ValueError("No features were collected for analysis.")
+
     out = {
-        'features': [np.concatenate(fs, axis=0)[:max_samples] for fs in feats_per_stage],
-        'masks':    [np.concatenate(ms, axis=0)[:max_samples] for ms in masks_per_stage],
-        'labels':   np.concatenate(all_labels, axis=0)[:max_samples],
-        'contexts': np.concatenate(all_contexts, axis=0)[:max_samples],
+        'features': [np.concatenate(fs, axis=0) for fs in feats_per_stage],
+        'masks':    [np.concatenate(ms, axis=0) for ms in masks_per_stage],
+        'labels':   np.concatenate(all_labels, axis=0),
+        'contexts': np.concatenate(all_contexts, axis=0),
         'gates':    model.get_gate_values(),
     }
     return out
