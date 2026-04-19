@@ -40,6 +40,10 @@ def parse_args():
     p.add_argument('--mode', type=str, default='cnn', choices=['cnn', 'oracle'],
                    help='Context mode for SCDMN')
     p.add_argument('--sparsity', type=float, default=0.5)
+    p.add_argument('--indep_width_mult', type=float, default=1.0,
+                   help='Per-expert width multiplier for independent. '
+                        '1.0 = full (4x params upper bound). '
+                        '0.5 = matches SCDMN active-channel budget (fair capacity comparison).')
     p.add_argument('--data_root', type=str, default='./data_cache')
     p.add_argument('--save_dir', type=str, default='./experiments/runs')
     p.add_argument('--skip_baseline', action='store_true')
@@ -65,6 +69,7 @@ def main():
         lr=args.lr,
         severity=args.severity,
         sparsity=args.sparsity,
+        indep_width_mult=args.indep_width_mult,
         use_official_c=(not args.no_official_c),
         train_size_per_context=args.train_size,
         data_root=args.data_root,

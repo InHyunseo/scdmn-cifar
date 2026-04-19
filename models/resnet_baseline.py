@@ -13,15 +13,18 @@ from .scdmn_resnet import BasicBlock, _make_stage
 
 
 class ResNet18CIFAR(nn.Module):
-    def __init__(self, num_classes: int = 10):
+    def __init__(self, num_classes: int = 10, width_mult: float = 1.0):
         super().__init__()
-        self.conv1 = nn.Conv2d(3, 64, 3, stride=1, padding=1, bias=False)
-        self.bn1 = nn.BatchNorm2d(64)
+        base = [64, 128, 256, 512]
+        ch = [max(1, int(round(c * width_mult))) for c in base]
 
-        self.layer1, c1 = _make_stage(64,  64,  3, stride=1)
-        self.layer2, c2 = _make_stage(c1, 128, 4, stride=2)
-        self.layer3, c3 = _make_stage(c2, 256, 6, stride=2)
-        self.layer4, c4 = _make_stage(c3, 512, 3, stride=2)
+        self.conv1 = nn.Conv2d(3, ch[0], 3, stride=1, padding=1, bias=False)
+        self.bn1 = nn.BatchNorm2d(ch[0])
+
+        self.layer1, c1 = _make_stage(ch[0], ch[0], 3, stride=1)
+        self.layer2, c2 = _make_stage(c1,    ch[1], 4, stride=2)
+        self.layer3, c3 = _make_stage(c2,    ch[2], 6, stride=2)
+        self.layer4, c4 = _make_stage(c3,    ch[3], 3, stride=2)
         self.stage_channels = [c1, c2, c3, c4]
 
         self.pool = nn.AdaptiveAvgPool2d(1)
@@ -44,14 +47,23 @@ class ResNet18CIFAR(nn.Module):
 
 class IndependentExperts(nn.Module):
     """
-    One ResNet18 per context, with oracle routing.
-    Serves as an upper bound: full parameter separation, correct context known.
+    One ResNet per context, with oracle routing.
+    width_mult=1.0 -> full-width experts (4x baseline params, upper bound).
+    width_mult=sqrt(1/N) -> param-matched to a single baseline
+      (each expert has ~1/N of baseline params; N experts sum to baseline).
+    width_mult=sparsity (e.g. 0.5) -> matches SCDMN's active-channel budget per context.
     """
-    def __init__(self, num_classes: int = 10, num_contexts: int = 4):
+    def __init__(
+        self,
+        num_classes: int = 10,
+        num_contexts: int = 4,
+        width_mult: float = 1.0,
+    ):
         super().__init__()
         self.num_contexts = num_contexts
         self.experts = nn.ModuleList([
-            ResNet18CIFAR(num_classes=num_classes) for _ in range(num_contexts)
+            ResNet18CIFAR(num_classes=num_classes, width_mult=width_mult)
+            for _ in range(num_contexts)
         ])
 
     def forward(self, x: torch.Tensor, ctx_label: torch.Tensor):

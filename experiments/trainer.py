@@ -33,6 +33,7 @@ class TrainConfig:
     momentum: float = 0.9
     weight_decay: float = 5e-4
     sparsity: float = 0.5
+    indep_width_mult: float = 1.0          # independent: per-expert width multiplier
     z_dim: int = 128
     severity: int = 3
     use_official_c: bool = True
@@ -58,7 +59,11 @@ def build_model(cfg: TrainConfig) -> nn.Module:
     if cfg.model_type == 'baseline':
         return ResNet18CIFAR(num_classes=10)
     if cfg.model_type == 'independent':
-        return IndependentExperts(num_classes=10, num_contexts=NUM_CONTEXTS)
+        return IndependentExperts(
+            num_classes=10,
+            num_contexts=NUM_CONTEXTS,
+            width_mult=cfg.indep_width_mult,
+        )
     if cfg.model_type == 'scdmn':
         return SCDMNResNet18(
             num_classes=10,
