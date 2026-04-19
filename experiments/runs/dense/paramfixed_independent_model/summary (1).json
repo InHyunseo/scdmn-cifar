@@ -1,0 +1,15 @@
+{
+  "independent": {
+    "epoch": 29,
+    "train_loss": 0.2766158759402923,
+    "train_acc": 0.9083032852564102,
+    "test_overall": 0.822025,
+    "per_context": {
+      "clean": 0.8448,
+      "brightness": 0.8369,
+      "frost": 0.8435,
+      "gaussian_noise": 0.7629
+    },
+    "gates": null
+  }
+}

@@ -7,7 +7,6 @@ data_cache
 *.pth
 *.pt
 *.h5
-*.json
 *.csv
 *.zip
 *.tar.gz

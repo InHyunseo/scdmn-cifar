@@ -1,0 +1,46 @@
+{
+  "baseline": {
+    "epoch": 29,
+    "train_loss": 0.01708918278484653,
+    "train_acc": 0.9950921474358975,
+    "test_overall": 0.811575,
+    "per_context": {
+      "clean": 0.8216,
+      "brightness": 0.8169,
+      "frost": 0.8228,
+      "gaussian_noise": 0.785
+    },
+    "gates": null
+  },
+  "independent": {
+    "epoch": 29,
+    "train_loss": 0.2340311892091846,
+    "train_acc": 0.9229517227564102,
+    "test_overall": 0.8303,
+    "per_context": {
+      "clean": 0.8502,
+      "brightness": 0.8437,
+      "frost": 0.8505,
+      "gaussian_noise": 0.7768
+    },
+    "gates": null
+  },
+  "scdmn_cnn": {
+    "epoch": 29,
+    "train_loss": 0.01930810224178295,
+    "train_acc": 0.994941907051282,
+    "test_overall": 0.818225,
+    "per_context": {
+      "clean": 0.8281,
+      "brightness": 0.8266,
+      "frost": 0.831,
+      "gaussian_noise": 0.7872
+    },
+    "gates": [
+      0.27966877818107605,
+      0.14793187379837036,
+      0.14763955771923065,
+      0.6942567229270935
+    ]
+  }
+}
