@@ -1,0 +1,246 @@
+=== Run: independent ===
+Config: TrainConfig(model_type='independent', context_mode='cnn', epochs=30, batch_size=128, lr=0.1, momentum=0.9, weight_decay=0.0005, sparsity=0.25, z_dim=128, severity=3, use_official_c=True, train_size_per_context=10000, warmup_soft_mask_epochs=2, device='cuda', seed=42, data_root='./data_cache', save_dir='./experiments/runs', run_name='independent', log_every=50)
+Train size: 40000   Test size: 40000
+Model: independent   Params: 44,695,848
+  epoch 000 step 0000   loss=2.4048
+  epoch 000 step 0050   loss=2.1072
+  epoch 000 step 0100   loss=2.0407
+  epoch 000 step 0150   loss=1.7841
+  epoch 000 step 0200   loss=1.7982
+  epoch 000 step 0250   loss=1.7040
+  epoch 000 step 0300   loss=1.8117
+Epoch 000  train_loss=1.9570  train_acc=0.2875  test_overall=0.3564  per_ctx={'clean': '0.391', 'brightness': '0.345', 'frost': '0.303', 'gaussian_noise': '0.386'}  time=7.6s
+  epoch 001 step 0000   loss=1.8156
+  epoch 001 step 0050   loss=1.6653
+  epoch 001 step 0100   loss=1.6586
+  epoch 001 step 0150   loss=1.7020
+  epoch 001 step 0200   loss=1.5269
+  epoch 001 step 0250   loss=1.5236
+  epoch 001 step 0300   loss=1.6448
+Epoch 001  train_loss=1.6260  train_acc=0.3981  test_overall=0.4089  per_ctx={'clean': '0.462', 'brightness': '0.321', 'frost': '0.428', 'gaussian_noise': '0.424'}  time=7.4s
+  epoch 002 step 0000   loss=1.4452
+  epoch 002 step 0050   loss=1.4867
+  epoch 002 step 0100   loss=1.5585
+  epoch 002 step 0150   loss=1.5304
+  epoch 002 step 0200   loss=1.4888
+  epoch 002 step 0250   loss=1.5591
+  epoch 002 step 0300   loss=1.4949
+Epoch 002  train_loss=1.4849  train_acc=0.4541  test_overall=0.4484  per_ctx={'clean': '0.467', 'brightness': '0.380', 'frost': '0.492', 'gaussian_noise': '0.454'}  time=7.5s
+  epoch 003 step 0000   loss=1.5800
+  epoch 003 step 0050   loss=1.2900
+  epoch 003 step 0100   loss=1.3633
+  epoch 003 step 0150   loss=1.4952
+  epoch 003 step 0200   loss=1.3740
+  epoch 003 step 0250   loss=1.4132
+  epoch 003 step 0300   loss=1.2584
+Epoch 003  train_loss=1.3599  train_acc=0.5059  test_overall=0.5062  per_ctx={'clean': '0.531', 'brightness': '0.500', 'frost': '0.490', 'gaussian_noise': '0.503'}  time=7.4s
+  epoch 004 step 0000   loss=1.2621
+  epoch 004 step 0050   loss=1.2729
+  epoch 004 step 0100   loss=1.1600
+  epoch 004 step 0150   loss=1.2168
+  epoch 004 step 0200   loss=1.3947
+  epoch 004 step 0250   loss=1.0487
+  epoch 004 step 0300   loss=1.2198
+Epoch 004  train_loss=1.2632  train_acc=0.5442  test_overall=0.5519  per_ctx={'clean': '0.538', 'brightness': '0.560', 'frost': '0.553', 'gaussian_noise': '0.557'}  time=7.4s
+  epoch 005 step 0000   loss=1.3080
+  epoch 005 step 0050   loss=1.1469
+  epoch 005 step 0100   loss=1.3692
+  epoch 005 step 0150   loss=1.2259
+  epoch 005 step 0200   loss=1.3171
+  epoch 005 step 0250   loss=1.3315
+  epoch 005 step 0300   loss=1.1857
+Epoch 005  train_loss=1.1828  train_acc=0.5732  test_overall=0.5625  per_ctx={'clean': '0.566', 'brightness': '0.501', 'frost': '0.618', 'gaussian_noise': '0.565'}  time=7.4s
+  epoch 006 step 0000   loss=1.0565
+  epoch 006 step 0050   loss=1.3612
+  epoch 006 step 0100   loss=1.1116
+  epoch 006 step 0150   loss=0.9485
+  epoch 006 step 0200   loss=0.9740
+  epoch 006 step 0250   loss=1.1780
+  epoch 006 step 0300   loss=1.1420
+Epoch 006  train_loss=1.1154  train_acc=0.6009  test_overall=0.5706  per_ctx={'clean': '0.577', 'brightness': '0.610', 'frost': '0.541', 'gaussian_noise': '0.554'}  time=7.4s
+  epoch 007 step 0000   loss=0.9897
+  epoch 007 step 0050   loss=0.9342
+  epoch 007 step 0100   loss=0.9117
+  epoch 007 step 0150   loss=1.0395
+  epoch 007 step 0200   loss=1.0742
+  epoch 007 step 0250   loss=1.1737
+  epoch 007 step 0300   loss=1.0049
+Epoch 007  train_loss=1.0549  train_acc=0.6266  test_overall=0.5993  per_ctx={'clean': '0.628', 'brightness': '0.574', 'frost': '0.610', 'gaussian_noise': '0.585'}  time=7.3s
+  epoch 008 step 0000   loss=1.2161
+  epoch 008 step 0050   loss=1.0732
+  epoch 008 step 0100   loss=0.9233
+  epoch 008 step 0150   loss=0.9903
+  epoch 008 step 0200   loss=0.9216
+  epoch 008 step 0250   loss=1.0089
+  epoch 008 step 0300   loss=1.0884
+Epoch 008  train_loss=1.0026  train_acc=0.6436  test_overall=0.6457  per_ctx={'clean': '0.675', 'brightness': '0.674', 'frost': '0.622', 'gaussian_noise': '0.611'}  time=7.4s
+  epoch 009 step 0000   loss=0.9883
+  epoch 009 step 0050   loss=1.1150
+  epoch 009 step 0100   loss=0.8770
+  epoch 009 step 0150   loss=0.9208
+  epoch 009 step 0200   loss=0.9217
+  epoch 009 step 0250   loss=1.0243
+  epoch 009 step 0300   loss=0.9242
+Epoch 009  train_loss=0.9496  train_acc=0.6622  test_overall=0.6539  per_ctx={'clean': '0.683', 'brightness': '0.678', 'frost': '0.649', 'gaussian_noise': '0.605'}  time=7.5s
+  epoch 010 step 0000   loss=1.0031
+  epoch 010 step 0050   loss=0.8564
+  epoch 010 step 0100   loss=0.9396
+  epoch 010 step 0150   loss=0.8572
+  epoch 010 step 0200   loss=0.7969
+  epoch 010 step 0250   loss=0.7273
+  epoch 010 step 0300   loss=0.9554
+Epoch 010  train_loss=0.9047  train_acc=0.6827  test_overall=0.6470  per_ctx={'clean': '0.681', 'brightness': '0.639', 'frost': '0.638', 'gaussian_noise': '0.629'}  time=7.5s
+  epoch 011 step 0000   loss=0.8589
+  epoch 011 step 0050   loss=0.9632
+  epoch 011 step 0100   loss=0.8498
+  epoch 011 step 0150   loss=1.0308
+  epoch 011 step 0200   loss=0.8099
+  epoch 011 step 0250   loss=0.7518
+  epoch 011 step 0300   loss=0.9397
+Epoch 011  train_loss=0.8534  train_acc=0.6991  test_overall=0.6644  per_ctx={'clean': '0.678', 'brightness': '0.658', 'frost': '0.681', 'gaussian_noise': '0.640'}  time=7.4s
+  epoch 012 step 0000   loss=0.7279
+  epoch 012 step 0050   loss=0.8035
+  epoch 012 step 0100   loss=0.8565
+  epoch 012 step 0150   loss=0.7380
+  epoch 012 step 0200   loss=0.6814
+  epoch 012 step 0250   loss=0.9505
+  epoch 012 step 0300   loss=0.7621
+Epoch 012  train_loss=0.8149  train_acc=0.7163  test_overall=0.7089  per_ctx={'clean': '0.736', 'brightness': '0.704', 'frost': '0.738', 'gaussian_noise': '0.658'}  time=7.4s
+  epoch 013 step 0000   loss=0.7124
+  epoch 013 step 0050   loss=0.6964
+  epoch 013 step 0100   loss=0.7663
+  epoch 013 step 0150   loss=0.9161
+  epoch 013 step 0200   loss=0.8254
+  epoch 013 step 0250   loss=0.7988
+  epoch 013 step 0300   loss=0.7937
+Epoch 013  train_loss=0.7832  train_acc=0.7260  test_overall=0.6979  per_ctx={'clean': '0.750', 'brightness': '0.706', 'frost': '0.702', 'gaussian_noise': '0.633'}  time=7.4s
+  epoch 014 step 0000   loss=0.7811
+  epoch 014 step 0050   loss=0.6710
+  epoch 014 step 0100   loss=0.7399
+  epoch 014 step 0150   loss=0.6762
+  epoch 014 step 0200   loss=0.7891
+  epoch 014 step 0250   loss=0.7651
+  epoch 014 step 0300   loss=0.8359
+Epoch 014  train_loss=0.7409  train_acc=0.7441  test_overall=0.7225  per_ctx={'clean': '0.752', 'brightness': '0.706', 'frost': '0.757', 'gaussian_noise': '0.676'}  time=7.5s
+  epoch 015 step 0000   loss=0.6142
+  epoch 015 step 0050   loss=0.5684
+  epoch 015 step 0100   loss=0.7620
+  epoch 015 step 0150   loss=0.7481
+  epoch 015 step 0200   loss=0.6935
+  epoch 015 step 0250   loss=0.6460
+  epoch 015 step 0300   loss=0.6190
+Epoch 015  train_loss=0.7014  train_acc=0.7572  test_overall=0.7300  per_ctx={'clean': '0.779', 'brightness': '0.704', 'frost': '0.759', 'gaussian_noise': '0.678'}  time=7.4s
+  epoch 016 step 0000   loss=0.7431
+  epoch 016 step 0050   loss=0.4775
+  epoch 016 step 0100   loss=0.9044
+  epoch 016 step 0150   loss=0.6509
+  epoch 016 step 0200   loss=0.5639
+  epoch 016 step 0250   loss=0.6025
+  epoch 016 step 0300   loss=0.7554
+Epoch 016  train_loss=0.6735  train_acc=0.7658  test_overall=0.7334  per_ctx={'clean': '0.777', 'brightness': '0.750', 'frost': '0.749', 'gaussian_noise': '0.657'}  time=7.4s
+  epoch 017 step 0000   loss=0.5618
+  epoch 017 step 0050   loss=0.4743
+  epoch 017 step 0100   loss=0.6883
+  epoch 017 step 0150   loss=0.5435
+  epoch 017 step 0200   loss=0.5952
+  epoch 017 step 0250   loss=0.6140
+  epoch 017 step 0300   loss=0.5797
+Epoch 017  train_loss=0.6302  train_acc=0.7815  test_overall=0.7316  per_ctx={'clean': '0.749', 'brightness': '0.757', 'frost': '0.761', 'gaussian_noise': '0.659'}  time=7.4s
+  epoch 018 step 0000   loss=0.7483
+  epoch 018 step 0050   loss=0.4818
+  epoch 018 step 0100   loss=0.5068
+  epoch 018 step 0150   loss=0.4399
+  epoch 018 step 0200   loss=0.5068
+  epoch 018 step 0250   loss=0.5884
+  epoch 018 step 0300   loss=0.5791
+Epoch 018  train_loss=0.5917  train_acc=0.7966  test_overall=0.7531  per_ctx={'clean': '0.755', 'brightness': '0.777', 'frost': '0.795', 'gaussian_noise': '0.685'}  time=7.3s
+  epoch 019 step 0000   loss=0.5721
+  epoch 019 step 0050   loss=0.5510
+  epoch 019 step 0100   loss=0.6955
+  epoch 019 step 0150   loss=0.6280
+  epoch 019 step 0200   loss=0.7294
+  epoch 019 step 0250   loss=0.6737
+  epoch 019 step 0300   loss=0.6214
+Epoch 019  train_loss=0.5525  train_acc=0.8081  test_overall=0.7623  per_ctx={'clean': '0.794', 'brightness': '0.787', 'frost': '0.785', 'gaussian_noise': '0.683'}  time=7.6s
+  epoch 020 step 0000   loss=0.5295
+  epoch 020 step 0050   loss=0.4502
+  epoch 020 step 0100   loss=0.4267
+  epoch 020 step 0150   loss=0.4800
+  epoch 020 step 0200   loss=0.6282
+  epoch 020 step 0250   loss=0.6219
+  epoch 020 step 0300   loss=0.6449
+Epoch 020  train_loss=0.5095  train_acc=0.8240  test_overall=0.7731  per_ctx={'clean': '0.802', 'brightness': '0.790', 'frost': '0.796', 'gaussian_noise': '0.705'}  time=7.4s
+  epoch 021 step 0000   loss=0.4608
+  epoch 021 step 0050   loss=0.4330
+  epoch 021 step 0100   loss=0.3453
+  epoch 021 step 0150   loss=0.3901
+  epoch 021 step 0200   loss=0.3847
+  epoch 021 step 0250   loss=0.4432
+  epoch 021 step 0300   loss=0.4825
+Epoch 021  train_loss=0.4601  train_acc=0.8441  test_overall=0.7938  per_ctx={'clean': '0.815', 'brightness': '0.806', 'frost': '0.815', 'gaussian_noise': '0.740'}  time=7.4s
+  epoch 022 step 0000   loss=0.2976
+  epoch 022 step 0050   loss=0.3927
+  epoch 022 step 0100   loss=0.4745
+  epoch 022 step 0150   loss=0.3671
+  epoch 022 step 0200   loss=0.2665
+  epoch 022 step 0250   loss=0.3735
+  epoch 022 step 0300   loss=0.3252
+Epoch 022  train_loss=0.4252  train_acc=0.8547  test_overall=0.7962  per_ctx={'clean': '0.826', 'brightness': '0.799', 'frost': '0.823', 'gaussian_noise': '0.737'}  time=7.3s
+  epoch 023 step 0000   loss=0.4012
+  epoch 023 step 0050   loss=0.4077
+  epoch 023 step 0100   loss=0.3331
+  epoch 023 step 0150   loss=0.3257
+  epoch 023 step 0200   loss=0.3376
+  epoch 023 step 0250   loss=0.4750
+  epoch 023 step 0300   loss=0.4406
+Epoch 023  train_loss=0.3757  train_acc=0.8735  test_overall=0.8106  per_ctx={'clean': '0.828', 'brightness': '0.828', 'frost': '0.837', 'gaussian_noise': '0.750'}  time=7.3s
+  epoch 024 step 0000   loss=0.3069
+  epoch 024 step 0050   loss=0.2933
+  epoch 024 step 0100   loss=0.4148
+  epoch 024 step 0150   loss=0.3797
+  epoch 024 step 0200   loss=0.2975
+  epoch 024 step 0250   loss=0.3464
+  epoch 024 step 0300   loss=0.3200
+Epoch 024  train_loss=0.3329  train_acc=0.8875  test_overall=0.8180  per_ctx={'clean': '0.842', 'brightness': '0.830', 'frost': '0.842', 'gaussian_noise': '0.758'}  time=7.3s
+  epoch 025 step 0000   loss=0.3040
+  epoch 025 step 0050   loss=0.3160
+  epoch 025 step 0100   loss=0.2542
+  epoch 025 step 0150   loss=0.2175
+  epoch 025 step 0200   loss=0.2845
+  epoch 025 step 0250   loss=0.2072
+  epoch 025 step 0300   loss=0.2467
+Epoch 025  train_loss=0.2901  train_acc=0.9042  test_overall=0.8206  per_ctx={'clean': '0.852', 'brightness': '0.831', 'frost': '0.836', 'gaussian_noise': '0.763'}  time=7.5s
+  epoch 026 step 0000   loss=0.2838
+  epoch 026 step 0050   loss=0.2983
+  epoch 026 step 0100   loss=0.1909
+  epoch 026 step 0150   loss=0.2655
+  epoch 026 step 0200   loss=0.1916
+  epoch 026 step 0250   loss=0.3123
+  epoch 026 step 0300   loss=0.3035
+Epoch 026  train_loss=0.2593  train_acc=0.9142  test_overall=0.8268  per_ctx={'clean': '0.853', 'brightness': '0.842', 'frost': '0.846', 'gaussian_noise': '0.766'}  time=7.5s
+  epoch 027 step 0000   loss=0.2080
+  epoch 027 step 0050   loss=0.2412
+  epoch 027 step 0100   loss=0.2174
+  epoch 027 step 0150   loss=0.3064
+  epoch 027 step 0200   loss=0.2803
+  epoch 027 step 0250   loss=0.2460
+  epoch 027 step 0300   loss=0.2670
+Epoch 027  train_loss=0.2322  train_acc=0.9253  test_overall=0.8328  per_ctx={'clean': '0.859', 'brightness': '0.843', 'frost': '0.853', 'gaussian_noise': '0.777'}  time=7.4s
+  epoch 028 step 0000   loss=0.1658
+  epoch 028 step 0050   loss=0.2066
+  epoch 028 step 0100   loss=0.2124
+  epoch 028 step 0150   loss=0.2373
+  epoch 028 step 0200   loss=0.1653
+  epoch 028 step 0250   loss=0.1282
+  epoch 028 step 0300   loss=0.2969
+Epoch 028  train_loss=0.2078  train_acc=0.9347  test_overall=0.8336  per_ctx={'clean': '0.859', 'brightness': '0.848', 'frost': '0.852', 'gaussian_noise': '0.774'}  time=7.4s
+  epoch 029 step 0000   loss=0.2548
+  epoch 029 step 0050   loss=0.2075
+  epoch 029 step 0100   loss=0.3046
+  epoch 029 step 0150   loss=0.1856
+  epoch 029 step 0200   loss=0.1755
+  epoch 029 step 0250   loss=0.1659
+  epoch 029 step 0300   loss=0.1879
+Epoch 029  train_loss=0.2037  train_acc=0.9370  test_overall=0.8357  per_ctx={'clean': '0.860', 'brightness': '0.850', 'frost': '0.855', 'gaussian_noise': '0.779'}  time=7.4s
+Best overall: 0.8357
+Saved: experiments/runs/independent_final.pt

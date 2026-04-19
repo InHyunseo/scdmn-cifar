@@ -3,7 +3,6 @@
 scdmn-cifar
 __pycache__
 data_cache
-*.log
 *.ckpt
 *.pth
 *.pt
@@ -21,4 +20,3 @@ build/
 *.ipynb_checkpoints/
 .DS_Store
 .vscode/
-runs
