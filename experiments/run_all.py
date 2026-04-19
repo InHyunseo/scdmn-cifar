@@ -49,6 +49,10 @@ def parse_args():
     p.add_argument('--skip_baseline', action='store_true')
     p.add_argument('--skip_independent', action='store_true')
     p.add_argument('--skip_scdmn', action='store_true')
+    p.add_argument('--run_sliced', action='store_true',
+                   help='Also run SCDMN-Sliced (oracle, true channel slicing).')
+    p.add_argument('--freeze_epoch', type=int, default=5,
+                   help='Epoch at which SCDMN-Sliced freezes its top-k masks.')
     p.add_argument('--quick', action='store_true', help='Quick smoke test (overrides several args)')
     p.add_argument('--no_official_c', action='store_true',
                    help='Force use of synthetic corruptions instead of CIFAR-10-C files')
@@ -111,6 +115,18 @@ def main():
         print(f"[Analysis] Gates: {analysis['gates']}")
         print(f"[Analysis] Context probe per stage: {analysis['probe_context_per_stage']}")
         print(f"[Analysis] Class   probe per stage: {analysis['probe_class_per_stage']}")
+
+    # 4) SCDMN-Sliced (oracle, true channel slicing)
+    if args.run_sliced:
+        cfg = TrainConfig(
+            model_type='scdmn_sliced',
+            context_mode='oracle',
+            run_name=f'scdmn_sliced_s{args.sparsity}',
+            mask_freeze_epoch=args.freeze_epoch,
+            **common_kwargs,
+        )
+        _, hist = train(cfg)
+        summary[f'scdmn_sliced_s{args.sparsity}'] = hist[-1]
 
     # Final comparison table
     print("\n" + "=" * 70)

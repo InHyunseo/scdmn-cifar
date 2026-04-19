@@ -20,7 +20,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 from data.multi_context_cifar import MultiContextCIFAR, CONTEXT_NAMES, NUM_CONTEXTS
-from models import SCDMNResNet18, ResNet18CIFAR, IndependentExperts
+from models import SCDMNResNet18, ResNet18CIFAR, IndependentExperts, SCDMNSliced
 
 
 @dataclass
@@ -39,6 +39,7 @@ class TrainConfig:
     use_official_c: bool = True
     train_size_per_context: Optional[int] = 10000  # keep run short
     warmup_soft_mask_epochs: int = 2       # SCDMN: use soft sigmoid mask for warmup
+    mask_freeze_epoch: int = 5             # SCDMN-Sliced: epoch at which top-k masks are frozen
     device: str = 'cuda' if torch.cuda.is_available() else 'cpu'
     seed: int = 42
     data_root: str = './data_cache'
@@ -72,6 +73,12 @@ def build_model(cfg: TrainConfig) -> nn.Module:
             z_dim=cfg.z_dim,
             sparsity=cfg.sparsity,
         )
+    if cfg.model_type == 'scdmn_sliced':
+        return SCDMNSliced(
+            num_classes=10,
+            num_contexts=NUM_CONTEXTS,
+            sparsity=cfg.sparsity,
+        )
     raise ValueError(f"Unknown model_type: {cfg.model_type}")
 
 
@@ -82,6 +89,8 @@ def model_forward(model: nn.Module, x: torch.Tensor, ctx: torch.Tensor, cfg: Tra
         if cfg.context_mode == 'oracle':
             return model(x, ctx_label=ctx, hard_mask=hard)
         return model(x, hard_mask=hard)
+    if cfg.model_type == 'scdmn_sliced':
+        return model(x, ctx_label=ctx)
     if cfg.model_type == 'independent':
         return model(x, ctx_label=ctx)
     return model(x)
@@ -183,6 +192,11 @@ def train(cfg: TrainConfig):
     history = []
 
     for epoch in range(cfg.epochs):
+        # SCDMN-Sliced: freeze top-k masks at the configured epoch
+        if cfg.model_type == 'scdmn_sliced' and epoch == cfg.mask_freeze_epoch and not model.is_frozen():
+            model.freeze_masks()
+            log(f"[scdmn_sliced] Froze masks at epoch {epoch}. Switching to sliced forward.")
+
         model.train()
         t0 = time.time()
         running_loss = 0.0
@@ -220,6 +234,8 @@ def train(cfg: TrainConfig):
         if cfg.model_type == 'scdmn':
             gates = model.get_gate_values()
             extra = f"   gates={[f'{g:.3f}' for g in gates]}"
+        elif cfg.model_type == 'scdmn_sliced':
+            extra = f"   frozen={model.is_frozen()}"
 
         log(f"Epoch {epoch:03d}  "
             f"train_loss={train_loss:.4f}  train_acc={train_acc:.4f}  "

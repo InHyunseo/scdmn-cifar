@@ -7,6 +7,7 @@ from .scdmn_components import (
 )
 from .scdmn_resnet import SCDMNResNet18
 from .resnet_baseline import ResNet18CIFAR, IndependentExperts
+from .scdmn_sliced import SCDMNSliced, SlicedBasicBlock
 
 __all__ = [
     "ContextEncoderCNN",
@@ -17,4 +18,6 @@ __all__ = [
     "SCDMNResNet18",
     "ResNet18CIFAR",
     "IndependentExperts",
+    "SCDMNSliced",
+    "SlicedBasicBlock",
 ]
