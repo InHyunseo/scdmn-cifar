@@ -18,10 +18,10 @@ class ResNet18CIFAR(nn.Module):
         self.conv1 = nn.Conv2d(3, 64, 3, stride=1, padding=1, bias=False)
         self.bn1 = nn.BatchNorm2d(64)
 
-        self.layer1, c1 = _make_stage(64,  64,  2, stride=1)
-        self.layer2, c2 = _make_stage(c1, 128, 2, stride=2)
-        self.layer3, c3 = _make_stage(c2, 256, 2, stride=2)
-        self.layer4, c4 = _make_stage(c3, 512, 2, stride=2)
+        self.layer1, c1 = _make_stage(64,  64,  3, stride=1)
+        self.layer2, c2 = _make_stage(c1, 128, 4, stride=2)
+        self.layer3, c3 = _make_stage(c2, 256, 6, stride=2)
+        self.layer4, c4 = _make_stage(c3, 512, 3, stride=2)
         self.stage_channels = [c1, c2, c3, c4]
 
         self.pool = nn.AdaptiveAvgPool2d(1)
