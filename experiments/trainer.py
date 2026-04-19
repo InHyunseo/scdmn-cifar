@@ -181,10 +181,23 @@ def train(cfg: TrainConfig):
     model = build_model(cfg).to(cfg.device)
     log(f"Model: {cfg.model_type}   Params: {count_params(model):,}")
 
-    optim = torch.optim.SGD(
-        model.parameters(), lr=cfg.lr, momentum=cfg.momentum,
-        weight_decay=cfg.weight_decay, nesterov=True,
-    )
+    if cfg.model_type == 'scdmn_sliced':
+        score_params = list(model.channel_scores.parameters())
+        score_ids = {id(p) for p in score_params}
+        other_params = [p for p in model.parameters() if id(p) not in score_ids]
+        optim = torch.optim.SGD(
+            [
+                {'params': other_params, 'lr': cfg.lr},
+                {'params': score_params, 'lr': cfg.lr * 10.0, 'weight_decay': 0.0},
+            ],
+            lr=cfg.lr, momentum=cfg.momentum,
+            weight_decay=cfg.weight_decay, nesterov=True,
+        )
+    else:
+        optim = torch.optim.SGD(
+            model.parameters(), lr=cfg.lr, momentum=cfg.momentum,
+            weight_decay=cfg.weight_decay, nesterov=True,
+        )
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optim, T_max=cfg.epochs)
     criterion = nn.CrossEntropyLoss()
 
