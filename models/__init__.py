@@ -8,6 +8,8 @@ from .scdmn_components import (
 from .scdmn_resnet import SCDMNResNet18
 from .resnet_baseline import ResNet18CIFAR, IndependentExperts
 from .scdmn_sliced import SCDMNSliced, SlicedBasicBlock
+from .scdmn_sliced_reg import SCDMNSlicedReg
+from .resnet_baseline_reg import BaselineResNetReg
 
 __all__ = [
     "ContextEncoderCNN",
@@ -20,4 +22,6 @@ __all__ = [
     "IndependentExperts",
     "SCDMNSliced",
     "SlicedBasicBlock",
+    "SCDMNSlicedReg",
+    "BaselineResNetReg",
 ]
