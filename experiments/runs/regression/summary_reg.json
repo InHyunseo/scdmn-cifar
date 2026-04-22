@@ -1,0 +1,26 @@
+{
+  "single_reg": {
+    "epoch": 29,
+    "train_loss": 0.28624363959981847,
+    "train_mae": 0.3330485214216587,
+    "test_overall_mae": 0.3204159233927727,
+    "per_context": {
+      "clean": 0.1784029544353485,
+      "brightness": 0.35823628311157224,
+      "frost": 0.356428311920166,
+      "gaussian_noise": 0.3885961441040039
+    }
+  },
+  "scdmn_sliced_reg": {
+    "epoch": 29,
+    "train_loss": 0.2657973864235175,
+    "train_mae": 0.31161371284188366,
+    "test_overall_mae": 0.34889471246004106,
+    "per_context": {
+      "clean": 0.24550382370948792,
+      "brightness": 0.38841407890319823,
+      "frost": 0.37717056827545165,
+      "gaussian_noise": 0.38449037895202637
+    }
+  }
+}
